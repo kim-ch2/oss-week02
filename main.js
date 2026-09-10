@@ -28,7 +28,8 @@
 import readline from "node:readline";
 
 // TODO: import Inko from "inko" and create an instance
-
+import Inko from "inko";
+const inko=new Inko();
 const reverse = process.argv.includes("--reverse");
 const lines = [];
 
@@ -53,4 +54,16 @@ rl.on("close", () => {
   //   1. 오픈 소스
   //   2. 깃허브 노드
   // Use ko2en instead of en2ko when reverse is true.
+  //아무것도 안 치고 enter만 눌러도 line이 한번 발생하므로 빈 줄부터 버린다.
+   const converted = lines
+    .filter((line) => line.trim() !== "")
+    .map((line) => {
+      if (reverse) return inko.ko2en(line);
+      else return inko.en2ko(line);
+    });
+
+  // 인덱스가 0부터라서 1을 더함.
+  converted.forEach((text, i) => {
+    console.log(`${i + 1}. ${text}`);
+  });
 });
