@@ -10,7 +10,23 @@
 //   *
 
 const n = Number(process.argv[2] ?? 5);
-
 // TODO: print the diamond with for / if and console.log.
 // Hint: for row i, count the spaces and the stars separately.
 // Hint: "*".repeat(3) gives "***".
+
+// 전체 중 가운데에 별이 n개 들어감
+const mid = (n - 1) / 2;
+
+for (let i = 0; i < n; i++) {
+  let stars;
+  if (i <= mid) {
+    stars = 2 * i + 1;            // 위쪽 
+  } else {
+    stars = 2 * (n - 1 - i) + 1;  // 아래쪽
+  }
+
+  // 오른쪽 공백은 안 찍어도 보이지 않으니 왼쪽만 계산
+  const spaces = (n - stars) / 2;
+
+  console.log(" ".repeat(spaces) + "*".repeat(stars));
+}
